@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"   xmlns:sec="http://www.thymeleaf.org/thymeleaf/extras/spring-security6" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+  <title>Document</title>
+</head>
+<body>
+  <header th:replace="~{layout/plantilla :: header}"/>
+ 
+  <div class="container">
+    <!-- user -->
+     <h2 th:text="${usuario}" class="bg-danger text-light "  > </h2>
+
+    <div class="row">
+      
+      <div class="col-md-6">
+        <h2>[[#{persona.h2}]]</h2>
+        <ul th:if="${personas !=null and !personas.empty}" class="list-group ">
+          <li th:each="persona : ${personas}" class="list-group-item bg-primary text-light">
+            
+            <span th:text="${persona.nombre}"></span> 
+            <span th:text="${persona.apellido}"></span>
+            <span th:text="${persona.correo}"></span>
+            <span th:text="${persona.telefono}"></span>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" href="#" class="btn btn-success" th:href="@{/editar/} + ${persona.id}" th:text="Editar" role="button"/>
+             
+            <a sec:authorize="hasRole('ROLE_ADMIN')" href="#" class="btn btn-danger" th:href="@{/eliminar/} + ${persona.id}" th:text="Eliminar" role="button"/>
+             
+          </li>
+          
+        </ul>
+        <li th:if="${personas==null or personas.empty}" class="list-group-item bg-danger text-light">
+          No hay personas disponibles
+        </li>
+
+        
+      </div>
+      <div class="col-md-6">
+
+        <a sec:authorize="hasRole('ROLE_ADMIN')" href="#" class="btn btn-primary" th:href="@{/agregar}" role="button">
+          [[ #{persona.crear} ]]
+        </a>
+          <!--editar-  -->
+        <a href="#" class="btn btn-primary" th:href="@{/buscar}" role="button">
+          Buscar Persona
+        </a>
+      </div>
+    </div>
+ <footer th:replace="~{layout/plantilla :: footer}"/>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.min.js" integrity="sha384-VQqxDN0EQCkWoxt/0vsQvZswzTHUVOImccYmSyhJTp7kGtPed0Qcx8rK9h9YEgx+" crossorigin="anonymous"></script>
+</body>
+</html>
