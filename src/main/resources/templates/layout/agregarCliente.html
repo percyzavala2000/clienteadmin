@@ -1,11 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf/extras/spring-security6">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Agregar Cliente</title>
 </head>
+
 <body>
-  
+  <section th:fragment="agregarCliente">
+    <div class="modal fade" id="agregarCliente" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header bg-info text-white">
+            <h5 class="modal-title fs-5" th:text="#{accion.agregar}">Agregar Cliente</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form th:action="@{/guardar}" method="POST" th:object="${persona}" class="was-validated">
+              <div class="mb-3 ">
+                <label for="nombre" class="form-label" th:text="#{persona.nombre}"></label>
+                <input type="text" id="nombre" name="nombre" class="form-control" required />
+              </div>
+              <div class="mb-3">
+                <label for="apellido" class="form-label" th:text="#{persona.apellido}"></label>
+                <input type="text" id="apellido" name="apellido" class="form-control" required />
+              </div>
+              <div class="mb-3">
+                <label for="correo" class="form-label" th:text="#{persona.correo}">Email</label>
+                <input type="email" id="correo" name="correo" class="form-control" required />
+              </div>
+              <div class="mb-3">
+                <label for="telefono" class="form-label" th:text="#{persona.telefono}">Telefono</label>
+                <input type="tel" id="telefono" name="telefono" class="form-control" required />
+              </div>
+              <div class="mb-3">
+                <label for="saldo" class="form-label" th:text="#{persona.saldo}">Saldo</label>
+                <input type="number" id="saldo" name="saldo" class="form-control"  step="any" />
+              </div>
+             <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" th:text="#{accion.guardar}"  >Agregar</button>
+              </div>
+            
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
 </body>
+
 </html>
