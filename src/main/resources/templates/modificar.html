@@ -1,49 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"> >
-
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf/extras/spring-security6">
 <head th:replace="~{layout/plantilla :: head}">
-  <title>Datos Persona</title>
+  <title>Datos de la  Persona</title>
+  <meta charset="UTF-8">
 </head>
 
 <body>
   <header th:replace="~{layout/plantilla :: header}" />
-  <div class="container">
-    <h1>Datos de Persona</h1>
-    <form th:action="@{/guardar}" method="post" th:object="${persona}">
-      <input type="hidden" th:name="id" th:field="*{id}" />
-      <div>
-        <label for="nombre">[[#{persona.nombre}]]:</label>
-        <input type="text" id="nombre" name="nombre" th:value="${persona.nombre}" th:field="*{nombre}" />
-        <span th:if="${#fields.hasErrors('nombre')}" class="text-danger" th:errors="*{nombre}">
-         Error nombre
-        </span>
-      </div>
-      <div>
-        <label for="apellido">[[#{persona.apellido}]]:</label>
-        <input type="text" id="apellido" name="apellido" th:value="${persona.apellido}" th:field="*{apellido}" />
-        <span th:if="${#fields.hasErrors('apellido')}" class="text-danger" th:errors="*{apellido}">
-          Error apellido
-        </span>
-      </div>
-      <div>
-        <label for="correo">[[#{persona.correo}]]:</label>
-        <input type="text" id="correo" name="correo" th:value="${persona.correo}" th:field="*{correo}" />
-        <span th:if="${#fields.hasErrors('correo')}" class="text-danger" th:errors="*{correo}">
-          Error correo
-        </span>
-      </div>
-      <div>
-        <label for="telefono">[[#{persona.telefono}]]:</label>
-        <input type="tel" id="telefono" name="telefono" th:value="${persona.telefono}" th:field="*{telefono}" />
-        <span th:if="${#fields.hasErrors('telefono')}" class="text-danger" th:errors="*{telefono}">
-          Error telefono
-        </span>
-      </div>
-      <input type="submit" name="guardar" value="guardar" class="btn btn-danger"   />
-      <a href="#" th:href="@{/}" class="btn btn-secondary">[[#{persona.cancelar}]]</a>
-    </form>
-  </div>
-  <footer th:replace="~{layout/plantilla :: footer}"/>
+  <section th:replace="~{layout/editarCliente::editarCliente}" />
+  <footer th:replace="~{layout/plantilla :: footer}" />
+ 
    
 </body>
 </html>
