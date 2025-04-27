@@ -64,5 +64,14 @@ public class ControladorInicio {
     personaService.guardar(persona);
     return "redirect:/";
   }
+  @GetMapping("/login")
+  public String login() {
+      return "login"; // Nombre de la plantilla de Thymeleaf (login.html)
+  }
+  
+   @GetMapping("/errores/403")
+  public String accessDenied() {
+      return "errores/403"; // Nombre de la plantilla de Thymeleaf (403.html)
+  }
 
 }

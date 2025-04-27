@@ -47,7 +47,9 @@ public class SecurityConfig {
    
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
       return  http
+      
             .authorizeHttpRequests(auth -> auth
+            .requestMatchers("/webjars/**", "/css/**", "/js/**").permitAll() // Permitir acceso a WebJars y recursos estáticos
                 .requestMatchers( "/agregar", "/guardar", "/editar/**", "/eliminar/**").hasRole("ADMIN")
                 .requestMatchers("/").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated()
