@@ -2,55 +2,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
   xmlns:sec="http://www.thymeleaf.org/thymeleaf/extras/spring-security6">
 
-<head th:replace="~{layout/plantilla :: head}">
-  <title>Inicio</title>
+<head th:replace="~{layout/plantilla :: head}"></head>
+
+
+<title>Inicio</title>
 </head>
 
 <body>
   <header th:replace="~{layout/plantilla :: header}" />
+  <section th:replace="~{layout/botonesAgregar :: botonesAgregar}"/>
+  <section th:replace="~{layout/listadoCliente :: listadoClientes}"/>
+  <footer th:replace="~{layout/plantilla :: footer}"/>
 
-  <div class="container">
-    <!-- user -->
-    <h2 th:text="${usuario}" class="bg-danger text-light "> </h2>
-
-    <div class="row">
-
-      <div class="col-md-6">
-        <h2>[[#{persona.h2}]]</h2>
-        <ul th:if="${personas !=null and !personas.empty}" class="list-group ">
-          <li th:each="persona : ${personas}" class="list-group-item bg-primary text-light">
-
-            <span th:text="${persona.nombre}"></span>
-            <span th:text="${persona.apellido}"></span>
-            <span th:text="${persona.correo}"></span>
-            <span th:text="${persona.telefono}"></span>
-            <a sec:authorize="hasRole('ROLE_ADMIN')" href="#" class="btn btn-success"
-              th:href="@{/editar/} + ${persona.id}" th:text="Editar" role="button" />
-
-            <a sec:authorize="hasRole('ROLE_ADMIN')" href="#" class="btn btn-danger"
-              th:href="@{/eliminar/} + ${persona.id}" th:text="Eliminar" role="button" />
-
-          </li>
-
-        </ul>
-        <li th:if="${personas==null or personas.empty}" class="list-group-item bg-danger text-light">
-          No hay personas disponibles
-        </li>
-
-
-      </div>
-      <div class="col-md-6">
-
-        <a sec:authorize="hasRole('ROLE_ADMIN')" href="#" class="btn btn-primary" th:href="@{/agregar}" role="button">
-          [[ #{persona.crear} ]]
-        </a>
-        <!--editar-  -->
-        <a href="#" class="btn btn-primary" th:href="@{/buscar}" role="button">
-          Buscar Persona
-        </a>
-      </div>
-    </div>
-    <footer th:replace="~{layout/plantilla :: footer}" />
 </body>
 
 </html>

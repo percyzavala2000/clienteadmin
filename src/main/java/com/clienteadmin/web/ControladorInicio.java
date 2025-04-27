@@ -32,6 +32,13 @@ public class ControladorInicio {
 
     model.addAttribute("personas", personas);
     model.addAttribute("usuario", user.getUsername());
+    var saldoTotal = 0D;
+    for (var p : personas) {
+      saldoTotal += p.getSaldo();
+    }
+    model.addAttribute("saldoTotal", saldoTotal);
+    model.addAttribute("totalClientes", personas.size());
+    
     log.info("Usuario autenticado: {}", user.getUsername());
     log.info("Roles del usuario: {}", user.getAuthorities());
     return "index";
